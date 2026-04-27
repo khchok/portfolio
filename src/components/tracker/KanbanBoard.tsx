@@ -41,8 +41,8 @@ export default function KanbanBoard() {
     const job = jobs.find((j) => j.id === jobId);
     if (!job || job.status === newStatus) return;
 
-    queryClient.setQueryData(["tracker-jobs"], (old: Job[]) =>
-      old.map((j) => (j.id === jobId ? { ...j, status: newStatus } : j))
+    queryClient.setQueryData(["tracker-jobs"], (old: Job[] | undefined) =>
+      old?.map((j) => (j.id === jobId ? { ...j, status: newStatus } : j)) ?? old
     );
 
     updateJobMutation({ id: jobId, data: { status: newStatus } }).catch(() => {
