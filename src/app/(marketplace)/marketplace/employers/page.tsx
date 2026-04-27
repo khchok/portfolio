@@ -41,6 +41,7 @@ export default function EmployerDashboardPage() {
       </main>
 
       <PostJobModal
+        key={editListing?.id ?? "new"}
         open={postOpen}
         onClose={handlePostClose}
         editListing={editListing}
