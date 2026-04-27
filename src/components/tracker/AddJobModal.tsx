@@ -27,8 +27,8 @@ export default function AddJobModal() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button>+ Add Job</Button>
+      <DialogTrigger render={<Button />}>
+        + Add Job
       </DialogTrigger>
       <DialogContent className="bg-white w-full max-w-md">
         <DialogHeader>
