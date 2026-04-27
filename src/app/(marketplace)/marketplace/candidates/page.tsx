@@ -67,7 +67,7 @@ export default function CandidateDashboardPage() {
       <JobDetailModal
         listingId={viewingListing?.id ?? null}
         onClose={() => setViewingListing(null)}
-        onApply={(id) => {
+        onApply={() => {
           const listing = viewingListing;
           setViewingListing(null);
           if (listing) setApplyingListing(listing);
