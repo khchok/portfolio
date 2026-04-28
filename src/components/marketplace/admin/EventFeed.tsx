@@ -50,7 +50,7 @@ export default function EventFeed({ module }: { module: EventModule }) {
 
   const events = data?.pages.flatMap((page) => page.items ?? []) ?? [];
   const observerTarget = useInfiniteScroll(
-    hasNextPage!,
+    hasNextPage ?? false,
     isFetchingNextPage,
     fetchNextPage,
   );
