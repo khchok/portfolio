@@ -8,7 +8,7 @@ export const useAdminEventsInfiniteQuery = (module: EventModule) =>
       apiGetEvents(module, { page: pageParam as number, pageSize: 20 }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
-      if (!lastPage?.items || lastPage.items.length === 0) return undefined;
+      if (!lastPage?.hasNextPage) return undefined;
       return allPages.length + 1;
     },
   });
