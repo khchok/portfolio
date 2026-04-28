@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
-import { useListingDetailQuery } from "@/services/marketplace/candidate-hooks";
+import { useListingDetailQuery } from "@/services/marketplace/candidates/candidates-queries";
 
 interface JobDetailModalProps {
   listingId: string | null;

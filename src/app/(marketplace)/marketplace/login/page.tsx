@@ -1,4 +1,5 @@
 "use client";
+import DemoCredentials from "@/components/marketplace/DemoCredentials";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,13 +14,14 @@ export default function MarketplaceLoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [isPending, setIsPending] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
     setError(null);
     setIsPending(true);
     try {
       await signIn(email, password);
-    } catch {
+    } catch (e) {
+      console.log({ e });
       setError("Invalid credentials. Please try again.");
     } finally {
       setIsPending(false);
@@ -34,7 +36,9 @@ export default function MarketplaceLoginPage() {
           <div className="h-8 w-8 rounded-lg bg-white/10 flex items-center justify-center">
             <Building2 className="h-4 w-4" />
           </div>
-          <span className="text-lg font-semibold tracking-tight">Job Marketplace</span>
+          <span className="text-lg font-semibold tracking-tight">
+            Job Marketplace
+          </span>
         </div>
         <div className="flex flex-col gap-4">
           <h1 className="text-4xl font-bold leading-tight tracking-tight">
@@ -43,7 +47,8 @@ export default function MarketplaceLoginPage() {
             with opportunity
           </h1>
           <p className="text-slate-400 text-base leading-relaxed max-w-sm">
-            Employers post openings. Candidates apply. Track every application from both sides.
+            Employers post openings. Candidates apply. Track every application
+            from both sides.
           </p>
         </div>
         <div className="flex flex-col gap-3">
@@ -53,7 +58,9 @@ export default function MarketplaceLoginPage() {
             { label: "1", description: "Application per job per candidate" },
           ].map(({ label, description }) => (
             <div key={label} className="flex items-center gap-4">
-              <span className="text-2xl font-bold text-white w-12">{label}</span>
+              <span className="text-2xl font-bold text-white w-12">
+                {label}
+              </span>
               <span className="text-sm text-slate-400">{description}</span>
             </div>
           ))}
@@ -64,11 +71,16 @@ export default function MarketplaceLoginPage() {
       <div className="flex flex-col justify-center px-8 py-16 sm:px-16">
         <div className="mx-auto w-full max-w-sm">
           <div className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-400 tracking-tight">Welcome back</h2>
+            <h2 className="text-2xl font-bold text-gray-400 tracking-tight">
+              Welcome back
+            </h2>
             <p className="mt-2 text-sm text-gray-500">
-              Sign in — you&apos;ll be directed to your employer or candidate dashboard.
+              Sign in — you&apos;ll be directed to your employer or candidate
+              dashboard.
             </p>
           </div>
+          <DemoCredentials setEmail={setEmail} setPassword={setPassword} />
+          <br />
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <div className="flex flex-col gap-1.5">
               <Label htmlFor="mp-email">Email</Label>
@@ -99,7 +111,11 @@ export default function MarketplaceLoginPage() {
                 {error}
               </p>
             )}
-            <Button type="submit" className="w-full flex justify-center items-center" disabled={isPending}>
+            <Button
+              type="submit"
+              className="w-full flex justify-center items-center"
+              disabled={isPending}
+            >
               {isPending ? (
                 <>
                   <LoaderCircleIcon className="h-4 w-4 animate-spin" />

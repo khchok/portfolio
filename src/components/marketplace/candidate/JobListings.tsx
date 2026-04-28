@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useBrowseListingsQuery } from "@/services/marketplace/candidate-hooks";
+import { useBrowseListingsQuery } from "@/services/marketplace/candidates/candidates-queries";
 import { MarketplaceListing } from "@/types";
 import { Search } from "lucide-react";
 import { useState } from "react";
@@ -14,7 +14,11 @@ interface JobListingsProps {
   onApply: (listing: MarketplaceListing) => void;
 }
 
-export default function JobListings({ appliedIds, onViewDetail, onApply }: JobListingsProps) {
+export default function JobListings({
+  appliedIds,
+  onViewDetail,
+  onApply,
+}: JobListingsProps) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
@@ -23,9 +27,13 @@ export default function JobListings({ appliedIds, onViewDetail, onApply }: JobLi
     search: search || undefined,
     category: category || undefined,
     location: location || undefined,
+    page: 1,
+    pageSize: 10,
   };
 
-  const { data: listings = [], isLoading } = useBrowseListingsQuery(params);
+  const { data, isLoading } = useBrowseListingsQuery(params);
+
+  const listings = data?.items || [];
 
   return (
     <div className="flex flex-col gap-5">
@@ -70,24 +78,42 @@ export default function JobListings({ appliedIds, onViewDetail, onApply }: JobLi
           {listings.map((listing) => {
             const hasApplied = appliedIds.has(listing.id);
             return (
-              <div key={listing.id} className="rounded-xl border border-gray-200 bg-white p-5">
+              <div
+                key={listing.id}
+                className="rounded-xl border border-gray-200 bg-white p-5"
+              >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-gray-900 text-sm mb-1">{listing.title}</h3>
+                    <h3 className="font-semibold text-gray-900 text-sm mb-1">
+                      {listing.title}
+                    </h3>
                     <div className="flex flex-wrap gap-2 mb-2">
-                      <Badge className="bg-slate-100 text-slate-700 border-0 text-xs">{listing.location}</Badge>
-                      <Badge className="bg-slate-100 text-slate-700 border-0 text-xs">{listing.category}</Badge>
+                      <Badge className="bg-slate-100 text-slate-700 border-0 text-xs">
+                        {listing.location}
+                      </Badge>
+                      <Badge className="bg-slate-100 text-slate-700 border-0 text-xs">
+                        {listing.category}
+                      </Badge>
                       <Badge className="bg-green-100 text-green-800 border-0 text-xs">
-                        ${listing.salaryMin.toLocaleString()} – ${listing.salaryMax.toLocaleString()} / yr
+                        ${listing.salaryMin.toLocaleString()} – $
+                        {listing.salaryMax.toLocaleString()} / yr
                       </Badge>
                       {hasApplied && (
-                        <Badge className="bg-blue-100 text-blue-800 border-0 text-xs">Applied</Badge>
+                        <Badge className="bg-blue-100 text-blue-800 border-0 text-xs">
+                          Applied
+                        </Badge>
                       )}
                     </div>
-                    <p className="text-xs text-gray-500 line-clamp-2">{listing.description}</p>
+                    <p className="text-xs text-gray-500 line-clamp-2">
+                      {listing.description}
+                    </p>
                   </div>
                   <div className="flex flex-col gap-2 shrink-0">
-                    <Button variant="outline" size="sm" onClick={() => onViewDetail(listing)}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => onViewDetail(listing)}
+                    >
                       View
                     </Button>
                     <Button

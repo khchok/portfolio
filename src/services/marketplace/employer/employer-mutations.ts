@@ -1,22 +1,10 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   apiCreateListing,
-  apiGetApplicants,
-  apiGetMyListings,
   apiToggleListingStatus,
   apiUpdateListing,
   CreateListingPayload,
-} from "./employer";
-
-export const useMyListingsQuery = () =>
-  useQuery({ queryKey: ["employer-listings"], queryFn: apiGetMyListings });
-
-export const useApplicantsQuery = (jobId: string | null) =>
-  useQuery({
-    queryKey: ["employer-applicants", jobId],
-    queryFn: () => apiGetApplicants(jobId!),
-    enabled: !!jobId,
-  });
+} from "./employer-service";
 
 export const useCreateListingMutation = () => {
   const queryClient = useQueryClient();

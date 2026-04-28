@@ -1,5 +1,6 @@
-import { MarketplaceApplication, MarketplaceListing } from "@/types";
 import request from "@/services/request";
+import { MarketplaceApplication, MarketplaceListing } from "@/types";
+import { IPagedResponse } from "@/types/common";
 
 export interface BrowseListingsParams {
   search?: string;
@@ -8,8 +9,8 @@ export interface BrowseListingsParams {
 }
 
 export const apiBrowseListings = async (
-  params: BrowseListingsParams = {}
-): Promise<MarketplaceListing[]> => {
+  params: BrowseListingsParams = {},
+): Promise<IPagedResponse<MarketplaceListing>> => {
   const response = await request.get("/api/job-marketplace/jobs", { params });
   return response.data;
 };
@@ -21,7 +22,7 @@ export const apiGetListingById = async (id: string): Promise<MarketplaceListing>
 
 export const apiApplyToJob = async (
   jobId: string,
-  coverText: string
+  coverText: string,
 ): Promise<MarketplaceApplication> => {
   const response = await request.post(`/api/job-marketplace/jobs/${jobId}/apply`, { coverText });
   return response.data;

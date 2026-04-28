@@ -21,12 +21,12 @@ export function proxy(request: NextRequest) {
   }
 
   if (isMarketplacePath) {
-    const marketplaceToken = request.cookies.get("marketplace_token")?.value;
+    const marketplaceToken = request.cookies.get("access_token")?.value;
     if (!marketplaceToken && !isMarketplaceLogin) {
       return NextResponse.redirect(new URL("/marketplace/login", request.url));
     }
     if (marketplaceToken && isMarketplaceLogin) {
-      return NextResponse.redirect(new URL("/marketplace/employers", request.url));
+      return NextResponse.redirect(new URL("/marketplace", request.url));
     }
   }
 

@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useApplyMutation } from "@/services/marketplace/candidate-hooks";
+import { useApplyMutation } from "@/services/marketplace/candidates/candidates-mutations";
 import { useState } from "react";
 import { toast } from "sonner";
 

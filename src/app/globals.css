@@ -1,8 +1,6 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (@media (prefers-color-scheme: dark));
 
 @theme inline {
   --color-background: var(--background);
@@ -83,7 +81,8 @@
   --sidebar-ring: oklch(0.704 0.04 256.788);
 }
 
-.dark {
+@media (prefers-color-scheme: dark) {
+:root {
   --background: oklch(0.129 0.042 264.695);
   --foreground: oklch(0.984 0.003 264.542);
   --card: oklch(0.208 0.042 264.695);
@@ -115,6 +114,7 @@
   --sidebar-accent-foreground: oklch(0.984 0.003 264.542);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.554 0.046 264.364);
+}
 }
 
 @layer base {

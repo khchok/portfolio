@@ -27,8 +27,14 @@ export interface JobDetail {
   statuses: JobStatusEntry[];
 }
 
+export enum MarketplaceRoleEnums {
+  EMPLOYER = "Employer",
+  CANDIDATE = "Candidate",
+}
 // JobMarketplace types
-export type MarketplaceRole = "employer" | "candidate";
+export type MarketplaceRole =
+  | MarketplaceRoleEnums.EMPLOYER
+  | MarketplaceRoleEnums.CANDIDATE;
 
 export interface MarketplaceUser {
   id: string;

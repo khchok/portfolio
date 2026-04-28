@@ -2,7 +2,7 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useApplicantsQuery } from "@/services/marketplace/employer-hooks";
+import { useApplicantsQuery } from "@/services/marketplace/employer/employer-queries";
 import { MarketplaceListing } from "@/types";
 
 const STATUS_COLORS: Record<string, string> = {

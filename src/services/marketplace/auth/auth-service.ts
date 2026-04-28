@@ -1,12 +1,11 @@
-import { MarketplaceUser } from "@/types";
 import request from "@/services/request";
+import { MarketplaceUser } from "@/types";
 
 export const apiMarketplaceSignIn = async (
   email: string,
-  password: string
-): Promise<{ user: MarketplaceUser }> => {
-  const response = await request.post("/api/job-marketplace/auth/login", { email, password });
-  return response.data;
+  password: string,
+): Promise<void> => {
+  await request.post("/api/job-marketplace/auth/login", { email, password });
 };
 
 export const apiMarketplaceSignOut = async (): Promise<void> => {

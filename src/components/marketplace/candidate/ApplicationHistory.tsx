@@ -1,7 +1,7 @@
 "use client";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useMyApplicationsQuery } from "@/services/marketplace/candidate-hooks";
+import { useMyApplicationsQuery } from "@/services/marketplace/candidates/candidates-queries";
 
 const STATUS_COLORS: Record<string, string> = {
   pending: "bg-yellow-100 text-yellow-800",

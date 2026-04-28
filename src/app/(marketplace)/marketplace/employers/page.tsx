@@ -4,13 +4,27 @@ import ApplicantsModal from "@/components/marketplace/employer/ApplicantsModal";
 import JobListingsTable from "@/components/marketplace/employer/JobListingsTable";
 import PostJobModal from "@/components/marketplace/employer/PostJobModal";
 import { Button } from "@/components/ui/button";
-import { MarketplaceListing } from "@/types";
-import { useState } from "react";
+import { useMarketplaceAuth } from "@/contexts/MarketplaceAuthContext";
+import { MarketplaceListing, MarketplaceRoleEnums } from "@/types";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function EmployerDashboardPage() {
+  const { user, isLoading } = useMarketplaceAuth();
+  const router = useRouter();
   const [postOpen, setPostOpen] = useState(false);
-  const [editListing, setEditListing] = useState<MarketplaceListing | null>(null);
-  const [applicantsListing, setApplicantsListing] = useState<MarketplaceListing | null>(null);
+  const [editListing, setEditListing] = useState<MarketplaceListing | null>(
+    null,
+  );
+  const [applicantsListing, setApplicantsListing] =
+    useState<MarketplaceListing | null>(null);
+
+  useEffect(() => {
+    if (isLoading) return;
+    if (!user) router.replace("/marketplace/login");
+    else if (user.role !== MarketplaceRoleEnums.EMPLOYER)
+      router.replace("/marketplace/candidates");
+  }, [user, isLoading, router]);
 
   function handleEdit(listing: MarketplaceListing) {
     setEditListing(listing);
@@ -22,14 +36,20 @@ export default function EmployerDashboardPage() {
     setEditListing(null);
   }
 
+  if (isLoading || user?.role !== MarketplaceRoleEnums.EMPLOYER) return null;
+
   return (
     <div className="min-h-screen bg-gray-50">
       <MarketplaceHeader title="Employer Dashboard" />
       <main className="max-w-screen-lg mx-auto px-6 py-8">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-lg font-bold text-gray-900">Your Job Listings</h2>
-            <p className="text-sm text-gray-500 mt-0.5">Post and manage your open positions</p>
+            <h2 className="text-lg font-bold text-gray-900">
+              Your Job Listings
+            </h2>
+            <p className="text-sm text-gray-500 mt-0.5">
+              Post and manage your open positions
+            </p>
           </div>
           <Button onClick={() => setPostOpen(true)}>+ Post a Job</Button>
         </div>
