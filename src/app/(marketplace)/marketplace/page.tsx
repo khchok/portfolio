@@ -13,7 +13,7 @@ export default function MarketplacePage() {
 
     if (!user) {
       console.log("root redirect to login");
-      router.push("/marketplace/login");
+      router.replace("/marketplace/login");
     } else if (user.role === MarketplaceRoleEnums.EMPLOYER) {
       console.log("Root redirect to employers");
       router.replace("/marketplace/employers");

@@ -6,6 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useBrowseListingsQuery } from "@/services/marketplace/candidates/candidates-queries";
 import { MarketplaceListing } from "@/types";
 import { Search } from "lucide-react";
+import { useDebouncedValue } from "@/hooks/useDebouncedValue";
 import { useState } from "react";
 
 interface JobListingsProps {
@@ -23,8 +24,10 @@ export default function JobListings({
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
 
+  const debouncedSearch = useDebouncedValue(search, 400);
+
   const params = {
-    search: search || undefined,
+    search: debouncedSearch || undefined,
     category: category || undefined,
     location: location || undefined,
     page: 1,

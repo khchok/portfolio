@@ -25,9 +25,9 @@ export function proxy(request: NextRequest) {
     if (!marketplaceToken && !isMarketplaceLogin) {
       return NextResponse.redirect(new URL("/marketplace/login", request.url));
     }
-    if (marketplaceToken && isMarketplaceLogin) {
-      return NextResponse.redirect(new URL("/marketplace", request.url));
-    }
+    // if (marketplaceToken && isMarketplaceLogin) {
+    //   return NextResponse.redirect(new URL("/marketplace", request.url));
+    // }
   }
 
   return NextResponse.next();

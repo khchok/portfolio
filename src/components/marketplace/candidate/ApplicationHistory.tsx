@@ -11,7 +11,12 @@ const STATUS_COLORS: Record<string, string> = {
 };
 
 export default function ApplicationHistory() {
-  const { data: applications = [], isLoading } = useMyApplicationsQuery();
+  const { data, isLoading } = useMyApplicationsQuery({
+    page: 1,
+    pageSize: 10,
+  });
+
+  const applications = data?.items ?? [];
 
   if (isLoading) {
     return (
@@ -33,7 +38,10 @@ export default function ApplicationHistory() {
   return (
     <div className="flex flex-col gap-3">
       {applications.map((app) => (
-        <div key={app.id} className="rounded-xl border border-gray-200 bg-white p-4">
+        <div
+          key={app.id}
+          className="rounded-xl border border-gray-200 bg-white p-4"
+        >
           <div className="flex items-center justify-between gap-4">
             <div className="min-w-0 flex-1">
               <p className="text-sm font-medium text-gray-900 truncate">
@@ -48,7 +56,9 @@ export default function ApplicationHistory() {
                 Applied {new Date(app.createdAt).toLocaleDateString()}
               </p>
             </div>
-            <Badge className={`text-xs border ${STATUS_COLORS[app.status] ?? ""} shrink-0`}>
+            <Badge
+              className={`text-xs border ${STATUS_COLORS[app.status] ?? ""} shrink-0`}
+            >
               {app.status}
             </Badge>
           </div>

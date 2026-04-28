@@ -1,3 +1,4 @@
+import { IPageRequest } from "@/types/common";
 import { useQuery } from "@tanstack/react-query";
 import {
   apiBrowseListings,
@@ -19,5 +20,8 @@ export const useListingDetailQuery = (id: string | null) =>
     enabled: !!id,
   });
 
-export const useMyApplicationsQuery = () =>
-  useQuery({ queryKey: ["candidate-applications"], queryFn: apiGetMyApplications });
+export const useMyApplicationsQuery = (params: IPageRequest) =>
+  useQuery({
+    queryKey: ["candidate-applications", params],
+    queryFn: apiGetMyApplications.bind(null, params),
+  });

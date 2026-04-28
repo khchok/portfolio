@@ -31,6 +31,7 @@ export function MarketplaceAuthProvider({
   useEffect(() => {
     if (!isLoading && isError) {
       if (!window.location.pathname.endsWith("/marketplace/login")) {
+        console.log({ isLoading, isError });
         router.replace("/marketplace/login");
       }
     }

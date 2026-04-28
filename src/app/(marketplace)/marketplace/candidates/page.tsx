@@ -28,7 +28,11 @@ export default function CandidateDashboardPage() {
     }
   }, [user, isLoading, router]);
 
-  const { data: applications = [] } = useMyApplicationsQuery();
+  const { data } = useMyApplicationsQuery({
+    page: 1,
+    pageSize: 10,
+  });
+  const applications = data?.items ?? [];
   const appliedIds = new Set(applications.map((a) => a.jobId));
 
   function handleApply(listing: MarketplaceListing) {
