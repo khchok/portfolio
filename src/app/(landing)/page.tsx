@@ -1,5 +1,6 @@
-import Link from "next/link";
 import { ArrowRight, Briefcase, Building2 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 interface ProjectCardProps {
   icon: React.ReactNode;
@@ -10,7 +11,14 @@ interface ProjectCardProps {
   label: string;
 }
 
-function ProjectCard({ icon, title, description, tech, href, label }: ProjectCardProps) {
+function ProjectCard({
+  icon,
+  title,
+  description,
+  tech,
+  href,
+  label,
+}: ProjectCardProps) {
   return (
     <div className="flex flex-col gap-5 rounded-2xl border border-slate-200 bg-white p-8 shadow-sm hover:shadow-md transition-shadow">
       <div className="flex items-center gap-3">
@@ -22,7 +30,10 @@ function ProjectCard({ icon, title, description, tech, href, label }: ProjectCar
       <p className="text-slate-500 text-sm leading-relaxed">{description}</p>
       <div className="flex flex-wrap gap-2">
         {tech.map((t) => (
-          <span key={t} className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
+          <span
+            key={t}
+            className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600"
+          >
             {t}
           </span>
         ))}
@@ -49,8 +60,68 @@ export default function LandingPage() {
           Chok Khar Hui
         </h1>
         <p className="mx-auto max-w-xl text-lg text-slate-500 leading-relaxed">
-          Full-stack engineer. Below are two live projects — a personal job-application
-          tracker and a Jobstreet-style marketplace.
+          Full-stack engineer. Below are two demo projects — a personal
+          job-application tracker and a Jobs marketplace.
+        </p>
+        <p className="mx-auto max-w-xl text-lg text-slate-500 leading-relaxed flex flex-col items-center justify-center gap-2 mt-2">
+          <a
+            href="https://github.com/khchok"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2.5 text-sm text-blue-600 hover:text-blue-800 transition-colors"
+          >
+            <Image
+              src="/images/icons/social.png"
+              alt="GitHub"
+              width={16}
+              height={16}
+              className="shrink-0"
+            />
+            github.com/khchok
+          </a>
+          <a
+            href="https://www.linkedin.com/in/khar-hui-chok-96a852203"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2.5 text-sm text-blue-600 hover:text-blue-800 transition-colors"
+          >
+            <Image
+              src="/images/icons/linkedin.png"
+              alt="LinkedIn"
+              width={16}
+              height={16}
+              className="shrink-0"
+            />
+            LinkedIn Profile
+          </a>
+          <a
+            href="mailto:chok072056@gmail.com"
+            className="flex items-center gap-2.5 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            <Image
+              src="/images/icons/mail.png"
+              alt="Email"
+              width={16}
+              height={16}
+              className="shrink-0"
+            />
+            chok072056@gmail.com
+          </a>
+          <a
+            href="https://wa.me/60182586282"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2.5 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            <Image
+              src="/images/icons/smartphone.png"
+              alt="WhatsApp"
+              width={16}
+              height={16}
+              className="shrink-0"
+            />
+            +60 18-258 6282
+          </a>
         </p>
       </section>
 
@@ -61,7 +132,14 @@ export default function LandingPage() {
             icon={<Briefcase className="h-5 w-5" />}
             title="Job Tracker"
             description="Kanban board for managing personal job applications — drag cards across stages, add notes, and track the full status history of every application."
-            tech={["Next.js 16", "TanStack Query", "DnD Kit", "Tailwind"]}
+            tech={[
+              "Fastify",
+              "Nodejs",
+              "Next.js",
+              "TanStack Query",
+              "DnD Kit",
+              "Tailwind",
+            ]}
             href="/tracker/login"
             label="Open Job Tracker"
           />
@@ -69,7 +147,15 @@ export default function LandingPage() {
             icon={<Building2 className="h-5 w-5" />}
             title="Job Marketplace"
             description="Jobstreet-style platform where employers post openings and candidates browse, apply, and track their applications — with role-based dashboards for both sides."
-            tech={["Next.js 16", "TanStack Query", "REST API", "Tailwind"]}
+            tech={[
+              ".Net Core",
+              "Event-driven",
+              "CQRS Pattern",
+              "EFCore",
+              "DDD",
+              "Next.js",
+              "Tailwind",
+            ]}
             href="/marketplace/login"
             label="Open Marketplace"
           />

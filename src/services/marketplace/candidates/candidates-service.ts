@@ -26,10 +26,10 @@ export const apiApplyToJob = async (
   jobId: string,
   coverText: string,
 ): Promise<MarketplaceApplication> => {
-  const response = await request.post(
-    `/api/job-marketplace/jobs/${jobId}/apply`,
-    { coverText },
-  );
+  const response = await request.post(`/api/job-marketplace/applications`, {
+    jobId,
+    coverLetter: coverText,
+  });
   return response.data;
 };
 
