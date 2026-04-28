@@ -30,11 +30,13 @@ export interface JobDetail {
 export enum MarketplaceRoleEnums {
   EMPLOYER = "Employer",
   CANDIDATE = "Candidate",
+  ADMIN = "Admin",
 }
 // JobMarketplace types
 export type MarketplaceRole =
   | MarketplaceRoleEnums.EMPLOYER
-  | MarketplaceRoleEnums.CANDIDATE;
+  | MarketplaceRoleEnums.CANDIDATE
+  | MarketplaceRoleEnums.ADMIN;
 
 export interface MarketplaceUser {
   id: string;
@@ -65,6 +67,7 @@ export interface MarketplaceApplication {
   coverText: string;
   status: "pending" | "reviewed" | "rejected" | "accepted";
   createdAt: string;
+  submittedAt: string;
   listing?: MarketplaceListing;
 }
 
@@ -75,4 +78,19 @@ export interface MarketplaceApplicant {
   coverText: string;
   status: "pending" | "reviewed" | "rejected" | "accepted";
   createdAt: string;
+}
+
+export const ApplicationStatus = {
+  1: "Submitted",
+  2: "Under Review",
+  3: "Accepted",
+  4: "Rejected",
+};
+
+export interface AdminEvent {
+  id: string;
+  type: string;
+  occurredAt: string;
+  aggregateId?: string;
+  data?: Record<string, unknown>;
 }
