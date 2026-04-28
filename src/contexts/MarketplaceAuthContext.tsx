@@ -41,6 +41,8 @@ export function MarketplaceAuthProvider({
     const me = await signInMutation.mutateAsync({ email, password });
     if (me.role === MarketplaceRoleEnums.EMPLOYER) {
       router.push("/marketplace/employers");
+    } else if (me.role === MarketplaceRoleEnums.ADMIN) {
+      router.push("/marketplace/admin");
     } else {
       router.push("/marketplace/candidates");
     }

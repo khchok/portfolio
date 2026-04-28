@@ -1,6 +1,7 @@
 "use client";
 
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { getSocialLinks } from "@/services/author/author-services";
 import Image from "next/image";
 
 interface AuthorModalProps {
@@ -9,6 +10,7 @@ interface AuthorModalProps {
 }
 
 export default function AuthorModal({ open, onOpenChange }: AuthorModalProps) {
+  const socialLinks = getSocialLinks();
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
@@ -38,16 +40,30 @@ export default function AuthorModal({ open, onOpenChange }: AuthorModalProps) {
 
           {/* Right content */}
           <div className="px-5 py-8 flex flex-col gap-4 flex-1">
-            <p className="text-sm text-gray-500 leading-relaxed">
+            <p className="text-sm text-primary leading-relaxed">
               Demostrating a portfolio of projects built with React, Nextjs,
               Fastify and .Net Core.
             </p>
-            <div className="flex flex-col gap-3">
+            {socialLinks.map(({ link, label, icon }) => {
+              return (
+                <a
+                  key={link}
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2.5 text-sm text-primary hover:text-muted-foreground transition-colors"
+                >
+                  {icon({})}
+                  {label}
+                </a>
+              );
+            })}
+            {/* <div className="flex flex-col gap-3">
               <a
                 href="https://github.com/khchok"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 text-sm text-blue-600 hover:text-blue-800 transition-colors"
+                className="flex items-center gap-2.5 text-sm text-primary hover:text-muted-foreground transition-colors"
               >
                 <Image
                   src="/images/icons/social.png"
@@ -62,20 +78,14 @@ export default function AuthorModal({ open, onOpenChange }: AuthorModalProps) {
                 href="https://www.linkedin.com/in/khar-hui-chok-96a852203"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 text-sm text-blue-600 hover:text-blue-800 transition-colors"
+                className="flex items-center gap-2.5 text-sm text-primary hover:text-muted-foreground transition-colors"
               >
-                <Image
-                  src="/images/icons/linkedin.png"
-                  alt="LinkedIn"
-                  width={16}
-                  height={16}
-                  className="shrink-0"
-                />
+                <FaLinkedin />
                 LinkedIn Profile
               </a>
               <a
                 href="mailto:chok072056@gmail.com"
-                className="flex items-center gap-2.5 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+                className="flex items-center gap-2.5 text-sm text-primary hover:text-muted-foreground transition-colors"
               >
                 <Image
                   src="/images/icons/mail.png"
@@ -90,18 +100,18 @@ export default function AuthorModal({ open, onOpenChange }: AuthorModalProps) {
                 href="https://wa.me/60182586282"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+                className="flex items-center gap-2.5 text-sm text-primary hover:text-muted-foreground transition-colors"
               >
                 <Image
                   src="/images/icons/smartphone.png"
                   alt="WhatsApp"
                   width={16}
                   height={16}
-                  className="shrink-0"
+                  className="shrink-0 "
                 />
                 +60 18-258 6282
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </DialogContent>

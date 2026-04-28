@@ -28,17 +28,17 @@ export default function AdminPage() {
   if (isLoading || user?.role !== MarketplaceRoleEnums.ADMIN) return null;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <MarketplaceHeader title="Admin Dashboard" />
       <main className="max-w-screen-lg mx-auto px-6 py-8">
-        <div className="flex gap-1 mb-6 bg-gray-100 rounded-lg p-1 w-fit">
+        <div className="flex gap-1 mb-6 bg-muted rounded-lg p-1 w-fit">
           {TABS.map(({ label, module }) => (
             <button
               key={module}
               className={`px-4 py-1.5 text-sm font-medium rounded-md transition-colors ${
                 activeModule === module
-                  ? "bg-white text-gray-900 shadow-sm"
-                  : "text-gray-500 hover:text-gray-700"
+                  ? "bg-card text-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
               onClick={() => setActiveModule(module)}
             >

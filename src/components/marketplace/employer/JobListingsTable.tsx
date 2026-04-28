@@ -45,7 +45,7 @@ export default function JobListingsTable({
 
   if (listings.length === 0) {
     return (
-      <div className="text-center py-16 text-gray-400 text-sm">
+      <div className="text-center py-16 text-muted-foreground text-sm">
         No listings yet. Post your first job.
       </div>
     );
@@ -56,24 +56,24 @@ export default function JobListingsTable({
       {listings.map((listing) => (
         <div
           key={listing.id}
-          className="rounded-xl border border-gray-200 bg-white p-5"
+          className="rounded-xl border border-border bg-card p-5"
         >
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 flex-wrap mb-1">
-                <h3 className="font-semibold text-gray-900 text-sm">
+                <h3 className="font-semibold text-foreground text-sm">
                   {listing.title}
                 </h3>
                 <Badge
-                  className={`text-xs border ${listing.isOpen ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-600"}`}
+                  className={`text-xs border ${listing.isOpen ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400" : "bg-muted text-muted-foreground"}`}
                 >
                   {listing.isOpen ? "Open" : "Closed"}
                 </Badge>
               </div>
-              <p className="text-xs text-gray-500">
-                {listing.location} · {listing.category}
+              <p className="text-xs text-muted-foreground">
+                {listing.city} · {listing.country}
               </p>
-              <p className="text-xs text-gray-400 mt-0.5">
+              <p className="text-xs text-muted-foreground mt-0.5">
                 ${listing.salaryMin.toLocaleString()} – $
                 {listing.salaryMax.toLocaleString()} / yr
               </p>
@@ -82,7 +82,7 @@ export default function JobListingsTable({
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-8 w-8 text-gray-400 hover:text-gray-700"
+                className="h-8 w-8 text-muted-foreground hover:text-foreground"
                 onClick={() => onViewApplicants(listing)}
               >
                 <Users className="h-4 w-4" />
@@ -90,7 +90,7 @@ export default function JobListingsTable({
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-8 w-8 text-gray-400 hover:text-gray-700"
+                className="h-8 w-8 text-muted-foreground hover:text-foreground"
                 onClick={() => onEdit(listing)}
               >
                 <Pencil className="h-4 w-4" />
@@ -104,7 +104,7 @@ export default function JobListingsTable({
               </Button>
             </div>
           </div>
-          <p className="text-xs text-gray-500 mt-3 line-clamp-2">
+          <p className="text-xs text-muted-foreground mt-3 line-clamp-2">
             {listing.description}
           </p>
         </div>

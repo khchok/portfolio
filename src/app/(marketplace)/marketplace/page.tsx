@@ -12,15 +12,16 @@ export default function MarketplacePage() {
     if (isLoading) return;
 
     if (!user) {
-      console.log("root redirect to login");
       router.replace("/marketplace/login");
     } else if (user.role === MarketplaceRoleEnums.EMPLOYER) {
-      console.log("Root redirect to employers");
       router.replace("/marketplace/employers");
     } else if (user.role === MarketplaceRoleEnums.CANDIDATE) {
-      console.log("Root redirect to candidate");
       router.replace("/marketplace/candidates");
+    } else if (user.role === MarketplaceRoleEnums.ADMIN) {
+      router.replace("/marketplace/admin");
     }
+
+    // router.replace("/marketplace/login");
   }, [user, isLoading, router]);
 
   return <>Marketplace root</>;

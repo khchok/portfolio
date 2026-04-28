@@ -1,7 +1,7 @@
 "use client";
-import { useDroppable } from "@dnd-kit/core";
-import { Job, JobStatus } from "@/types";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Job, JobStatus } from "@/types";
+import { useDroppable } from "@dnd-kit/core";
 import JobCard from "./JobCard";
 
 function JobCardSkeleton() {
@@ -30,13 +30,21 @@ interface KanbanColumnProps {
   onDelete: (id: string) => void;
 }
 
-export default function KanbanColumn({ id, label, jobs, isLoading, onView, onEdit, onDelete }: KanbanColumnProps) {
+export default function KanbanColumn({
+  id,
+  label,
+  jobs,
+  isLoading,
+  onView,
+  onEdit,
+  onDelete,
+}: KanbanColumnProps) {
   const { setNodeRef, isOver } = useDroppable({ id });
 
   return (
     <div className="flex flex-col w-64 shrink-0">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="font-semibold text-sm text-gray-700">{label}</h3>
+        <h3 className="font-semibold text-sm text-foreground">{label}</h3>
         <span className="bg-gray-100 text-gray-600 text-xs font-medium px-2 py-0.5 rounded-full">
           {jobs.length}
         </span>
@@ -46,7 +54,7 @@ export default function KanbanColumn({ id, label, jobs, isLoading, onView, onEdi
         className={`flex flex-col gap-2 min-h-40 rounded-xl p-2 transition-colors ${
           isOver
             ? "bg-blue-50 border-2 border-blue-300 border-dashed"
-            : "bg-gray-50 border-2 border-transparent"
+            : "bg-card border-2 border-transparent"
         }`}
       >
         {isLoading ? (
@@ -57,7 +65,13 @@ export default function KanbanColumn({ id, label, jobs, isLoading, onView, onEdi
           </>
         ) : (
           jobs.map((job) => (
-            <JobCard key={job.id} job={job} onView={onView} onEdit={onEdit} onDelete={onDelete} />
+            <JobCard
+              key={job.id}
+              job={job}
+              onView={onView}
+              onEdit={onEdit}
+              onDelete={onDelete}
+            />
           ))
         )}
       </div>

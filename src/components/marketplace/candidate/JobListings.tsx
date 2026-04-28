@@ -60,7 +60,7 @@ export default function JobListings({
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             className="pl-9"
             placeholder="Search jobs..."
@@ -90,7 +90,7 @@ export default function JobListings({
           <Skeleton className="h-28 w-full rounded-xl" />
         </div>
       ) : listings?.length === 0 ? (
-        <div className="text-center py-16 text-gray-400 text-sm">
+        <div className="text-center py-16 text-muted-foreground text-sm">
           No open listings match your filters.
         </div>
       ) : (
@@ -100,31 +100,31 @@ export default function JobListings({
             return (
               <div
                 key={listing.id}
-                className="rounded-xl border border-gray-200 bg-white p-5"
+                className="rounded-xl border border-border bg-card p-5"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-gray-900 text-sm mb-1">
+                    <h3 className="font-semibold text-foreground text-sm mb-1">
                       {listing.title}
                     </h3>
                     <div className="flex flex-wrap gap-2 mb-2">
-                      <Badge className="bg-slate-100 text-slate-700 border-0 text-xs">
+                      <Badge className="bg-secondary text-secondary-foreground border-0 text-xs">
                         {listing.city}
                       </Badge>
-                      <Badge className="bg-slate-100 text-slate-700 border-0 text-xs">
+                      <Badge className="bg-secondary text-secondary-foreground border-0 text-xs">
                         {listing.country}
                       </Badge>
-                      <Badge className="bg-green-100 text-green-800 border-0 text-xs">
+                      <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 border-0 text-xs">
                         ${listing.salaryMin.toLocaleString()} – $
                         {listing.salaryMax.toLocaleString()} / yr
                       </Badge>
                       {hasApplied && (
-                        <Badge className="bg-blue-100 text-blue-800 border-0 text-xs">
+                        <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400 border-0 text-xs">
                           Applied
                         </Badge>
                       )}
                     </div>
-                    <p className="text-xs text-gray-500 line-clamp-2">
+                    <p className="text-xs text-muted-foreground line-clamp-2">
                       {listing.description}
                     </p>
                   </div>

@@ -47,15 +47,15 @@ export default function CandidateDashboardPage() {
   if (isLoading || user?.role !== MarketplaceRoleEnums.CANDIDATE) return null;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <MarketplaceHeader title="Candidate Dashboard" />
       <main className="max-w-screen-lg mx-auto px-6 py-8">
-        <div className="flex gap-1 mb-6 bg-gray-100 rounded-lg p-1 w-fit">
+        <div className="flex gap-1 mb-6 bg-muted rounded-lg p-1 w-fit">
           <button
             className={`px-4 py-1.5 text-sm font-medium rounded-md transition-colors ${
               activeTab === "browse"
-                ? "bg-white text-gray-900 shadow-sm"
-                : "text-gray-500 hover:text-gray-700"
+                ? "bg-card text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
             }`}
             onClick={() => setActiveTab("browse")}
           >
@@ -64,8 +64,8 @@ export default function CandidateDashboardPage() {
           <button
             className={`px-4 py-1.5 text-sm font-medium rounded-md transition-colors ${
               activeTab === "history"
-                ? "bg-white text-gray-900 shadow-sm"
-                : "text-gray-500 hover:text-gray-700"
+                ? "bg-card text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
             }`}
             onClick={() => setActiveTab("history")}
           >

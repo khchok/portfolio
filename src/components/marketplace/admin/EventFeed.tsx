@@ -6,9 +6,9 @@ import { EventModule } from "@/services/marketplace/admin/admin-service";
 import { AdminEvent } from "@/types";
 
 const MODULE_BADGE_COLORS: Record<EventModule, string> = {
-  identity: "bg-blue-100 text-blue-800",
-  jobs: "bg-amber-100 text-amber-800",
-  applications: "bg-green-100 text-green-800",
+  identity: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400",
+  jobs: "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400",
+  applications: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400",
 };
 
 function EventCard({
@@ -19,25 +19,25 @@ function EventCard({
   module: EventModule;
 }) {
   return (
-    <div className="rounded-xl border border-gray-200 bg-white p-4">
+    <div className="rounded-xl border border-border bg-card p-4">
       <div className="flex items-center gap-3">
         <span
           className={`inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium ${MODULE_BADGE_COLORS[module]}`}
         >
-          {event.type}
+          {event.eventType}
         </span>
-        <span className="text-xs text-gray-400 ml-auto shrink-0">
-          {new Date(event.occurredAt).toLocaleString()}
+        <span className="text-xs text-muted-foreground ml-auto shrink-0">
+          {new Date(event.occurredOnUtc).toLocaleString()}
         </span>
       </div>
       {event.aggregateId && (
-        <p className="mt-2 font-mono text-xs text-gray-500 bg-gray-50 rounded px-2 py-1 w-fit">
+        <p className="mt-2 font-mono text-xs text-muted-foreground bg-muted rounded px-2 py-1 w-fit">
           {event.aggregateId.slice(0, 8)}…
         </p>
       )}
-      {event.data && (
-        <pre className="mt-2 text-xs text-gray-600 bg-gray-50 rounded p-2 overflow-x-auto">
-          {JSON.stringify(event.data, null, 2)}
+      {event.content && (
+        <pre className="mt-2 text-xs text-foreground bg-muted rounded p-2 overflow-x-auto">
+          {JSON.stringify(event.content, null, 2)}
         </pre>
       )}
     </div>
@@ -67,7 +67,7 @@ export default function EventFeed({ module }: { module: EventModule }) {
 
   if (events.length === 0) {
     return (
-      <div className="text-center py-16 text-gray-400 text-sm">
+      <div className="text-center py-16 text-muted-foreground text-sm">
         No events found.
       </div>
     );
@@ -78,7 +78,7 @@ export default function EventFeed({ module }: { module: EventModule }) {
       {events.map((event) => (
         <EventCard key={event.id} event={event} module={module} />
       ))}
-      <div ref={observerTarget} className="h-10 m-auto text-xs text-gray-400">
+      <div ref={observerTarget} className="h-10 m-auto text-xs text-muted-foreground">
         {isFetchingNextPage
           ? "Loading..."
           : hasNextPage

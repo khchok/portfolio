@@ -33,7 +33,7 @@ export default function ApplyModal({ listingId, listingTitle, onClose, onSuccess
 
   return (
     <Dialog open={!!listingId} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="bg-white w-full max-w-md">
+      <DialogContent className="bg-card w-full max-w-md">
         <DialogHeader>
           <DialogTitle>Apply — {listingTitle}</DialogTitle>
         </DialogHeader>

@@ -1,6 +1,8 @@
-import { ArrowRight, Briefcase, Building2 } from "lucide-react";
-import Image from "next/image";
+import { getSocialLinks } from "@/services/author/author-services";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { FiBriefcase } from "react-icons/fi";
+import { LuBuilding2 } from "react-icons/lu";
 
 interface ProjectCardProps {
   icon: React.ReactNode;
@@ -49,6 +51,7 @@ function ProjectCard({
 }
 
 export default function LandingPage() {
+  const socialLinks = getSocialLinks();
   return (
     <main className="min-h-screen bg-slate-50">
       {/* Hero */}
@@ -64,64 +67,20 @@ export default function LandingPage() {
           job-application tracker and a Jobs marketplace.
         </p>
         <p className="mx-auto max-w-xl text-lg text-slate-500 leading-relaxed flex flex-col items-center justify-center gap-2 mt-2">
-          <a
-            href="https://github.com/khchok"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2.5 text-sm text-blue-600 hover:text-blue-800 transition-colors"
-          >
-            <Image
-              src="/images/icons/social.png"
-              alt="GitHub"
-              width={16}
-              height={16}
-              className="shrink-0"
-            />
-            github.com/khchok
-          </a>
-          <a
-            href="https://www.linkedin.com/in/khar-hui-chok-96a852203"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2.5 text-sm text-blue-600 hover:text-blue-800 transition-colors"
-          >
-            <Image
-              src="/images/icons/linkedin.png"
-              alt="LinkedIn"
-              width={16}
-              height={16}
-              className="shrink-0"
-            />
-            LinkedIn Profile
-          </a>
-          <a
-            href="mailto:chok072056@gmail.com"
-            className="flex items-center gap-2.5 text-sm text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            <Image
-              src="/images/icons/mail.png"
-              alt="Email"
-              width={16}
-              height={16}
-              className="shrink-0"
-            />
-            chok072056@gmail.com
-          </a>
-          <a
-            href="https://wa.me/60182586282"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2.5 text-sm text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            <Image
-              src="/images/icons/smartphone.png"
-              alt="WhatsApp"
-              width={16}
-              height={16}
-              className="shrink-0"
-            />
-            +60 18-258 6282
-          </a>
+          {socialLinks.map(({ link, label, icon }) => {
+            return (
+              <a
+                key={link}
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2.5 text-sm text-blue-600 hover:text-blue-800 transition-colors"
+              >
+                {icon({})}
+                {label}
+              </a>
+            );
+          })}
         </p>
       </section>
 
@@ -129,7 +88,7 @@ export default function LandingPage() {
       <section className="mx-auto max-w-4xl px-6 pb-24">
         <div className="grid gap-6 sm:grid-cols-2">
           <ProjectCard
-            icon={<Briefcase className="h-5 w-5" />}
+            icon={<FiBriefcase className="h-5 w-5" />}
             title="Job Tracker"
             description="Kanban board for managing personal job applications — drag cards across stages, add notes, and track the full status history of every application."
             tech={[
@@ -144,9 +103,9 @@ export default function LandingPage() {
             label="Open Job Tracker"
           />
           <ProjectCard
-            icon={<Building2 className="h-5 w-5" />}
+            icon={<LuBuilding2 className="h-5 w-5" />}
             title="Job Marketplace"
-            description="Jobstreet-style platform where employers post openings and candidates browse, apply, and track their applications — with role-based dashboards for both sides."
+            description="A job marketplace platform where employers post openings and candidates browse, apply, and track their applications — with role-based dashboards for both sides."
             tech={[
               ".Net Core",
               "Event-driven",

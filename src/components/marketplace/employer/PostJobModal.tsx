@@ -61,7 +61,7 @@ export default function PostJobModal({ open, onClose, editListing }: PostJobModa
 
   return (
     <Dialog open={open} onOpenChange={(o) => !o && handleClose()}>
-      <DialogContent className="bg-white w-full max-w-lg max-h-[90vh] overflow-y-auto">
+      <DialogContent className="bg-card w-full max-w-lg max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{editListing ? "Edit Listing" : "Post a Job"}</DialogTitle>
         </DialogHeader>

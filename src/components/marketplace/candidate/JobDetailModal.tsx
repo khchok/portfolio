@@ -28,7 +28,7 @@ export default function JobDetailModal({
 
   return (
     <Dialog open={!!listingId} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="bg-white w-full max-w-lg max-h-[90vh] overflow-y-auto">
+      <DialogContent className="bg-card w-full max-w-lg max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
             {isLoading ? <Skeleton className="h-5 w-48" /> : data?.title}
@@ -43,34 +43,34 @@ export default function JobDetailModal({
         ) : data ? (
           <div className="flex flex-col gap-5 mt-1">
             <div className="flex flex-wrap gap-2">
-              <Badge className="bg-slate-100 text-slate-700 border-0 text-xs">
+              <Badge className="bg-secondary text-secondary-foreground border-0 text-xs">
                 {data.city}
               </Badge>
-              <Badge className="bg-slate-100 text-slate-700 border-0 text-xs">
+              <Badge className="bg-secondary text-secondary-foreground border-0 text-xs">
                 {data.country}
               </Badge>
-              <Badge className="bg-green-100 text-green-800 border-0 text-xs">
+              <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 border-0 text-xs">
                 ${data.salaryMin.toLocaleString()} – $
                 {data.salaryMax.toLocaleString()} / yr
               </Badge>
             </div>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">
+              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
                 Description
               </p>
-              <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-wrap">
+              <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">
                 {data.description}
               </p>
             </div>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">
+              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
                 Requirements
               </p>
-              <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-wrap">
+              <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">
                 {data.requirements}
               </p>
             </div>
-            <div className="flex justify-end gap-2 pt-2 border-t border-gray-100">
+            <div className="flex justify-end gap-2 pt-2 border-t border-border">
               <Button variant="outline" onClick={onClose}>
                 Close
               </Button>

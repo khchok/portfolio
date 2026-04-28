@@ -39,12 +39,12 @@ export default function EmployerDashboardPage() {
   if (isLoading || user?.role !== MarketplaceRoleEnums.EMPLOYER) return null;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <MarketplaceHeader title="Employer Dashboard" />
       <main className="max-w-screen-lg mx-auto px-6 py-8">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-lg font-bold text-gray-900">
+            <h2 className="text-lg font-bold text-primary">
               Your Job Listings
             </h2>
             <p className="text-sm text-gray-500 mt-0.5">

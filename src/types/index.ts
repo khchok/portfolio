@@ -89,8 +89,11 @@ export const ApplicationStatus = {
 
 export interface AdminEvent {
   id: string;
-  type: string;
-  occurredAt: string;
+  eventType: string;
+
+  occurredOnUtc: string;
+  processedOnUtc: string;
+  processed: boolean;
   aggregateId?: string;
-  data?: Record<string, unknown>;
+  content?: Record<string, unknown>;
 }
