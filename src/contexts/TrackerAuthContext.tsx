@@ -1,7 +1,11 @@
 "use client";
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  apiSignIn,
+  apiSignOut,
+  TrackerUser,
+} from "@/services/tracker/user-service";
 import { useRouter } from "next/navigation";
-import { apiGetUser, apiSignIn, apiSignOut, TrackerUser } from "@/services/tracker/user-service";
+import { createContext, useContext, useState } from "react";
 
 interface TrackerAuthContextValue {
   user: TrackerUser | null;
@@ -12,22 +16,26 @@ interface TrackerAuthContextValue {
 
 const TrackerAuthContext = createContext<TrackerAuthContextValue | null>(null);
 
-export function TrackerAuthProvider({ children }: { children: React.ReactNode }) {
+export function TrackerAuthProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const router = useRouter();
   const [user, setUser] = useState<TrackerUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    apiGetUser()
-      .then(setUser)
-      .catch(() => setUser(null))
-      .finally(() => setIsLoading(false));
-  }, []);
+  // useEffect(() => {
+  //   apiGetUser()
+  //     .then(setUser)
+  //     .catch(() => setUser(null))
+  //     .finally(() => setIsLoading(false));
+  // }, []);
 
   async function signIn(email: string, password: string) {
     await apiSignIn(email, password);
-    const me = await apiGetUser();
-    setUser(me);
+    // const me = await apiGetUser();
+    setUser({ email } as TrackerUser);
     router.push("/tracker");
   }
 
@@ -49,6 +57,7 @@ export function TrackerAuthProvider({ children }: { children: React.ReactNode })
 
 export function useTrackerAuth() {
   const ctx = useContext(TrackerAuthContext);
-  if (!ctx) throw new Error("useTrackerAuth must be used within TrackerAuthProvider");
+  if (!ctx)
+    throw new Error("useTrackerAuth must be used within TrackerAuthProvider");
   return ctx;
 }

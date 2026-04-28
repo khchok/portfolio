@@ -11,7 +11,8 @@ export function proxy(request: NextRequest) {
   const isMarketplaceLogin = pathname === "/marketplace/login";
 
   if (isTrackerPath) {
-    const trackerToken = request.cookies.get("tracker_token")?.value;
+    // tracker token
+    const trackerToken = request.cookies.get("token")?.value;
     if (!trackerToken && !isTrackerLogin) {
       return NextResponse.redirect(new URL("/tracker/login", request.url));
     }
@@ -21,6 +22,7 @@ export function proxy(request: NextRequest) {
   }
 
   if (isMarketplacePath) {
+    // marketplace token
     const marketplaceToken = request.cookies.get("access_token")?.value;
     if (!marketplaceToken && !isMarketplaceLogin) {
       return NextResponse.redirect(new URL("/marketplace/login", request.url));
