@@ -94,6 +94,7 @@ export default function LandingPage() {
             tech={[
               "Fastify",
               "Nodejs",
+              "Supabase + Postgres",
               "Next.js",
               "TanStack Query",
               "DnD Kit",
@@ -108,6 +109,7 @@ export default function LandingPage() {
             description="A job marketplace platform where employers post openings and candidates browse, apply, and track their applications — with role-based dashboards for both sides."
             tech={[
               ".Net Core",
+              "MSSQL",
               "Event-driven",
               "CQRS Pattern",
               "EFCore",
