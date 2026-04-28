@@ -1,8 +1,13 @@
 "use client";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useListingDetailQuery } from "@/services/marketplace/candidates/candidates-queries";
 
 interface JobDetailModalProps {
@@ -38,22 +43,37 @@ export default function JobDetailModal({
         ) : data ? (
           <div className="flex flex-col gap-5 mt-1">
             <div className="flex flex-wrap gap-2">
-              <Badge className="bg-slate-100 text-slate-700 border-0 text-xs">{data.location}</Badge>
-              <Badge className="bg-slate-100 text-slate-700 border-0 text-xs">{data.category}</Badge>
+              <Badge className="bg-slate-100 text-slate-700 border-0 text-xs">
+                {data.city}
+              </Badge>
+              <Badge className="bg-slate-100 text-slate-700 border-0 text-xs">
+                {data.country}
+              </Badge>
               <Badge className="bg-green-100 text-green-800 border-0 text-xs">
-                ${data.salaryMin.toLocaleString()} – ${data.salaryMax.toLocaleString()} / yr
+                ${data.salaryMin.toLocaleString()} – $
+                {data.salaryMax.toLocaleString()} / yr
               </Badge>
             </div>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">Description</p>
-              <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-wrap">{data.description}</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">
+                Description
+              </p>
+              <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-wrap">
+                {data.description}
+              </p>
             </div>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">Requirements</p>
-              <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-wrap">{data.requirements}</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">
+                Requirements
+              </p>
+              <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-wrap">
+                {data.requirements}
+              </p>
             </div>
             <div className="flex justify-end gap-2 pt-2 border-t border-gray-100">
-              <Button variant="outline" onClick={onClose}>Close</Button>
+              <Button variant="outline" onClick={onClose}>
+                Close
+              </Button>
               <Button
                 disabled={hasApplied}
                 onClick={() => listingId && onApply(listingId)}

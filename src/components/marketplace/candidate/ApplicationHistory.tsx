@@ -49,7 +49,7 @@ export default function ApplicationHistory() {
               </p>
               {app.listing && (
                 <p className="text-xs text-gray-400 mt-0.5">
-                  {app.listing.location} · {app.listing.category}
+                  {app.listing.city} · {app.listing.country}
                 </p>
               )}
               <p className="text-xs text-gray-400 mt-0.5">

@@ -53,6 +53,8 @@ export interface MarketplaceListing {
   category: string;
   isOpen: boolean;
   employerId: string;
+  city: string;
+  country: string;
   createdAt: string;
 }
 

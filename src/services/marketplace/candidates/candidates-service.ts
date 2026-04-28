@@ -2,14 +2,14 @@ import request from "@/services/request";
 import { MarketplaceApplication, MarketplaceListing } from "@/types";
 import { IPagedResponse, IPageRequest } from "@/types/common";
 
-export interface BrowseListingsParams {
+export interface BrowseListingsParams extends IPageRequest {
   search?: string;
   category?: string;
   location?: string;
 }
 
 export const apiBrowseListings = async (
-  params: BrowseListingsParams = {},
+  params: BrowseListingsParams,
 ): Promise<IPagedResponse<MarketplaceListing>> => {
   const response = await request.get("/api/job-marketplace/jobs", { params });
   return response.data;

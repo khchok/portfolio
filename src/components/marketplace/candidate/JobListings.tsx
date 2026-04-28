@@ -3,10 +3,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useBrowseListingsQuery } from "@/services/marketplace/candidates/candidates-queries";
+import {
+  useDebouncedValue,
+  useInfiniteScroll,
+} from "@/hooks/useDebouncedValue";
+import { useBrowseListingsInfiniteQuery } from "@/services/marketplace/candidates/candidates-queries";
 import { MarketplaceListing } from "@/types";
 import { Search } from "lucide-react";
-import { useDebouncedValue } from "@/hooks/useDebouncedValue";
 import { useState } from "react";
 
 interface JobListingsProps {
@@ -34,9 +37,23 @@ export default function JobListings({
     pageSize: 10,
   };
 
-  const { data, isLoading } = useBrowseListingsQuery(params);
+  // const { data, isLoading } = useBrowseListingsQuery(params);
+  const {
+    data: infiniteData,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+  } = useBrowseListingsInfiniteQuery(params);
 
-  const listings = data?.items || [];
+  const listings =
+    infiniteData && infiniteData.pages.flatMap((page) => page.items || []);
+
+  const observerTarget = useInfiniteScroll(
+    hasNextPage!,
+    isFetchingNextPage,
+    fetchNextPage,
+  );
 
   return (
     <div className="flex flex-col gap-5">
@@ -72,13 +89,13 @@ export default function JobListings({
           <Skeleton className="h-28 w-full rounded-xl" />
           <Skeleton className="h-28 w-full rounded-xl" />
         </div>
-      ) : listings.length === 0 ? (
+      ) : listings?.length === 0 ? (
         <div className="text-center py-16 text-gray-400 text-sm">
           No open listings match your filters.
         </div>
       ) : (
         <div className="flex flex-col gap-3">
-          {listings.map((listing) => {
+          {listings?.map((listing) => {
             const hasApplied = appliedIds.has(listing.id);
             return (
               <div
@@ -92,10 +109,10 @@ export default function JobListings({
                     </h3>
                     <div className="flex flex-wrap gap-2 mb-2">
                       <Badge className="bg-slate-100 text-slate-700 border-0 text-xs">
-                        {listing.location}
+                        {listing.city}
                       </Badge>
                       <Badge className="bg-slate-100 text-slate-700 border-0 text-xs">
-                        {listing.category}
+                        {listing.country}
                       </Badge>
                       <Badge className="bg-green-100 text-green-800 border-0 text-xs">
                         ${listing.salaryMin.toLocaleString()} – $
@@ -131,6 +148,13 @@ export default function JobListings({
               </div>
             );
           })}
+          <div ref={observerTarget} className="h-10 m-auto">
+            {isLoading
+              ? "Loading ..."
+              : hasNextPage
+                ? "Load more"
+                : "No more data"}
+          </div>
         </div>
       )}
     </div>

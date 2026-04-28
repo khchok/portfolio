@@ -1,5 +1,5 @@
 import { IPageRequest } from "@/types/common";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import {
   apiBrowseListings,
   apiGetListingById,
@@ -12,6 +12,21 @@ export const useBrowseListingsQuery = (params: BrowseListingsParams) =>
     queryKey: ["candidate-listings", params],
     queryFn: () => apiBrowseListings(params),
   });
+
+export const useBrowseListingsInfiniteQuery = (
+  params: BrowseListingsParams,
+) => {
+  return useInfiniteQuery({
+    queryKey: ["candidate-listings-infinite", params],
+    queryFn: ({ pageParam = 1 }) =>
+      apiBrowseListings({ ...params, page: pageParam as number }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      if (!lastPage?.items || lastPage.items.length === 0) return undefined;
+      return allPages.length + 1;
+    },
+  });
+};
 
 export const useListingDetailQuery = (id: string | null) =>
   useQuery({
